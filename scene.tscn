@@ -1,8 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://db3tx6rt4bc44"]
+[gd_scene load_steps=8 format=3 uid="uid://db3tx6rt4bc44"]
 
 [ext_resource type="Script" path="res://PlayerMovement.cs" id="1_t0kjy"]
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_hjc30"]
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cehfn"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_y4b81"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_wdjc4"]
 
@@ -14,14 +18,18 @@ size = Vector3(10, 0.1, 10)
 [node name="Scene" type="Node3D"]
 
 [node name="Player" type="RigidBody3D" parent="."]
-gravity_scale = 0.0
+physics_material_override = SubResource("PhysicsMaterial_hjc30")
 script = ExtResource("1_t0kjy")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
 shape = SubResource("CapsuleShape3D_cehfn")
 
-[node name="Camera3D" type="Camera3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.610949, -0.492917)
+[node name="PlayerCam" type="Camera3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.507064, 0)
+current = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
+mesh = SubResource("CapsuleMesh_y4b81")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 physics_material_override = SubResource("PhysicsMaterial_wdjc4")
@@ -33,3 +41,6 @@ shape = SubResource("BoxShape3D_5ekth")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
 transform = Transform3D(10, 0, 0, 0, 0.1, 0, 0, 0, 10, 0, -2, 0)
 mesh = SubResource("BoxMesh_5ssbh")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.298113, 11.6155)
